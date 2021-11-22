@@ -9,9 +9,6 @@
             <MenuItem mnemonicParsing="false" text="Quit" />
         </Menu>
         <Menu mnemonicParsing="false" text="Edit">
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
             <MenuItem mnemonicParsing="false" text="Delete" />
             <MenuItem mnemonicParsing="false" text="Rename" />
         </Menu>

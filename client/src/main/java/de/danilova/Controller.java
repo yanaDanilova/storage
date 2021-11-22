@@ -1,5 +1,6 @@
 package de.danilova;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
@@ -24,6 +25,9 @@ public class Controller implements Initializable {
     private Path path;
 
 
+    private List<String> serverFileList;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Network.start();
@@ -33,18 +37,19 @@ public class Controller implements Initializable {
                 Files.createDirectory(clientStorage);
             }
             clientView.getItems().clear();
-            clientView.getItems().addAll(getFile(clientStorage));
+            clientView.getItems().addAll(updateClientsFileList(clientStorage));
             clientView.setOnMouseClicked(event -> {
                 if(event.getClickCount() == 2 ){
                     selectedFile = String.valueOf(clientView.getSelectionModel().getSelectedItem());
                 }
             });
             serverView.getItems().clear();
-            //как запросить у сервера какие файлы на нем хранятся
-            serverView.getItems().addAll();
-            clientView.setOnMouseClicked(event -> {
-                if(event.getClickCount() == 2 ){
-                    selectedFile = String.valueOf(clientView.getSelectionModel().getSelectedItem());
+            Network.sendMessage(new CommandMessage("/list"));
+
+
+            serverView.setOnMouseClicked(event -> {
+                if(event.getClickCount() ==2 ){
+                    selectedFile = String.valueOf(serverView.getSelectionModel().getSelectedItem());
                 }
             });
 
@@ -63,7 +68,21 @@ public class Controller implements Initializable {
                         String filename = fileMessage.getFilename();
                         Path path = Paths.get("clientStorage/" + filename);
                         Files.write(path ,fileMessage.getFile());
+                        Platform.runLater(()->{
+                            clientView.getItems().clear();
+                            try {
+                                clientView.getItems().addAll(updateClientsFileList(clientStorage));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        });
+
                     }
+                    if(abstractMessage instanceof UpdateListMessage){
+                        serverFileList = ((UpdateListMessage) abstractMessage).getServerFileList();
+                        updateServerFileList(serverFileList);
+                    }
+
                 }
 
             } catch (IOException e) {
@@ -88,8 +107,15 @@ public class Controller implements Initializable {
         }
     }
 
-    public List<String> getFile(Path path) throws IOException {
-        return Files.list(clientStorage).map(p->p.getFileName().toString()).collect(Collectors.toList());
+    public List<String> updateClientsFileList(Path path) throws IOException {
+            return Files.list(clientStorage).map(p->p.getFileName().toString()).collect(Collectors.toList());
+    }
+
+    public void updateServerFileList(List<String> serverListFile){
+        Platform.runLater(()->{
+            serverView.getItems().clear();
+            serverView.getItems().addAll(serverListFile);
+        });
     }
 
 
