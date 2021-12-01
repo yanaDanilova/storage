@@ -31,7 +31,7 @@ public class Server {
                             System.out.println("client connected");
                             channel.pipeline().addLast(
                                     new ObjectEncoder(),
-                                    new ObjectDecoder(3*1024*1024, ClassResolvers.cacheDisabled(null)),
+                                    new ObjectDecoder(2*1024*1024, ClassResolvers.cacheDisabled(null)),
                                     new ClientHandler()
                             );
                         }

@@ -4,27 +4,14 @@
 <?import javafx.scene.layout.*?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.danilova.Controller">
-    <MenuBar VBox.vgrow="NEVER">
-        <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" text="Quit" />
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <MenuItem mnemonicParsing="false" text="Rename" />
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-            <MenuItem mnemonicParsing="false" text="About App" />
-        </Menu>
-    </MenuBar>
-    <AnchorPane VBox.vgrow="ALWAYS">
-        <ListView fx:id="clientView" layoutX="14.0" layoutY="30.0" prefHeight="297.0" prefWidth="271.0" />
-        <ListView fx:id="serverView" layoutX="355.0" layoutY="30.0" prefHeight="297.0" prefWidth="271.0" />
-        <Button layoutX="293.0" layoutY="105.0" mnemonicParsing="false" onAction="#sendFile" prefHeight="55.0" prefWidth="55.0" text="&gt;" />
-        <Button layoutX="293.0" layoutY="175.0" mnemonicParsing="false"  onAction="#requireFile" prefHeight="55.0" prefWidth="55.0" text="&lt;" />
-        <TextField fx:id="textFieldSend" layoutX="15.0" layoutY="339.0" prefHeight="27.0" prefWidth="612.0" />
-        <TextField layoutX="14.0" layoutY="3.0" prefHeight="27.0" prefWidth="271.0" />
-        <TextField layoutX="355.0" layoutY="3.0" prefHeight="27.0" prefWidth="271.0" />
-        <Button layoutX="253.0" layoutY="3.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="32.0" text="..." />
-        <Button layoutX="594.0" layoutY="3.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="32.0" text="..." />
+    <AnchorPane prefHeight="397.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
+        <ListView fx:id="clientView" layoutX="14.0" layoutY="48.0" prefHeight="312.0" prefWidth="265.0" />
+        <ListView fx:id="serverView" layoutX="361.0" layoutY="48.0" prefHeight="312.0" prefWidth="265.0" />
+        <Button layoutX="287.0" layoutY="145.0" mnemonicParsing="false" onAction="#sendFile" prefHeight="55.0" prefWidth="68.0" text="&gt;" />
+        <Button layoutX="287.0" layoutY="210.0" mnemonicParsing="false" onAction="#requireFile" prefHeight="55.0" prefWidth="68.0" text="&lt;" />
+        <Button layoutX="287.0" layoutY="305.0" mnemonicParsing="false" onAction="#deleteFile" prefHeight="55.0" prefWidth="68.0" text="Delete" />
+        <Button layoutX="286.0" layoutY="48.0" mnemonicParsing="false" onAction="#renameFile" prefHeight="55.0" prefWidth="68.0" text="Rename" />
+        <TextField fx:id="textField" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="611.0" />
+       <Button layoutX="15.0" layoutY="366.0" prefHeight="27.0" prefWidth="611.0" text="Exit" />
     </AnchorPane>
 </VBox>

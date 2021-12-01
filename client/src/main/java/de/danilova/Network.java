@@ -19,7 +19,7 @@ public class Network {
         try {
             socket = new Socket("localhost", 8189);
             outputStream = new ObjectEncoderOutputStream(socket.getOutputStream());
-            inputStream = new ObjectDecoderInputStream(socket.getInputStream(), 3 * 1024 * 1024);
+            inputStream = new ObjectDecoderInputStream(socket.getInputStream(),2*1024*1024);
 
         } catch (IOException e) {
             e.printStackTrace();
